@@ -1,0 +1,9 @@
+.friend {
+    border: 2px solid gray;
+    border-radius: 10px;
+    padding: 15px;
+}
+
+.friend h2 {
+    margin: 0 0 5px;
+}
