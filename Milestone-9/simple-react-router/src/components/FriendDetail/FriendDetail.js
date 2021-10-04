@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router';
 
-const FriendDetail = () => {
-    /* const params = useParams();
-    console.log(params); */
-    const { friendId } = useParams();
-
+const FriendDetail = () => {    
     const [friend, setFriend] = useState({});
+
+    // console.log(useParams());
+    const { friendId } = useParams();
 
     useEffect(() => {
         fetch(`https://jsonplaceholder.typicode.com/users/${friendId}`)

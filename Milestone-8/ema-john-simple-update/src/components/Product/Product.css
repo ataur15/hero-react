@@ -31,11 +31,11 @@
     color: green;
 }
 
-.cart-btn {
+.regular-btn {
     background-color: #f0c14b;
     border-color: #a88734 #9c7e31 #846a29;
     color: #111;
-    padding: 10px 20px;
+    padding: 8px 16px;
     border-style: solid;
     margin: 15px 0;
     border-width: 1px;
@@ -44,6 +44,6 @@
     vertical-align: middle;
 }
 
-.cart-btn:hover {
+.regular-btn:hover {
     background: #d2a83f;
 }

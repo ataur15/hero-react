@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import useCart from '../../hooks/useCart';
 import { addToDb, getStoredCart } from '../../utilities/fakedb';
 import Cart from '../Cart/Cart';
 import Product from '../Product/Product';
@@ -6,7 +8,7 @@ import './Shop.css';
 
 const Shop = () => {
     const [products, setProducts] = useState([]);
-    const [cart, setCart] = useState([]);
+    const [cart, setCart] = useCart();
     const [searchProducts, setSearchProducts] = useState([]);
 
     useEffect(() => {
@@ -18,23 +20,10 @@ const Shop = () => {
             })
     }, []);
 
-    useEffect(() => {
-        if (products.length) {
-            const getCart = getStoredCart();
-            const savedCart = [];
-            for (const key in getCart) {
-                const quantity = getCart[key];
-                const cartProduct = products.find(product => product.key === key);
-                cartProduct["quantity"] = quantity;
-                savedCart.push(cartProduct);
-            }
-            setCart(savedCart);
-        }
-
-    }, [products]);
-
     const handelAddToCart = (product) => {
         const newCart = [...cart, product];
+        console.log(newCart);
+
         setCart(newCart);
         addToDb(product.key);
     }
@@ -52,7 +41,7 @@ const Shop = () => {
                     <input onChange={handleSearch} type="text" name="" id="" placeholder="Search Product" />
                 </div>
             </div>
-            <div className="shop-container">
+            <div className="main-container">
                 <div className="product-container">
                     {
                         searchProducts.map(product => <Product
@@ -64,7 +53,9 @@ const Shop = () => {
                     }
                 </div>
                 <div className="cart-container">
-                    <Cart cart={cart}></Cart>
+                    <Cart cart={cart}>
+                        <Link to="/review"><button className="regular-btn">Order Review</button></Link>
+                    </Cart>
                 </div>
             </div>
         </div>

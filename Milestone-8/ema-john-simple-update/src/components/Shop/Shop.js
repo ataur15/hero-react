@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import useCart from '../../hooks/useCart';
 import { addToDb, getStoredCart } from '../../utilities/fakedb';
 import Cart from '../Cart/Cart';
 import Product from '../Product/Product';
@@ -6,7 +8,7 @@ import './Shop.css';
 
 const Shop = () => {
     const [products, setProducts] = useState([]);
-    const [cart, setCart] = useState([]);
+    const [cart, setCart] = useCart(products);
     const [displayProducts, setDisplayProducts] = useState([]);
 
     // Data fetch
@@ -21,31 +23,23 @@ const Shop = () => {
             });
     }, []);
 
-    // Get data from the local storage
-    useEffect(() => {
-        // console.log("Local storage cart called");
-        if (products.length) {
-            const savedCart = getStoredCart();
-            const storedCart = [];
-            for (const key in savedCart) {
-                // console.log(key, savedCart[key]);
-                const addedProduct = products.find(product => product.key === key);
-                // console.log(key, addedProduct);
-                if (addedProduct) {
-                    const quantity = savedCart[key];
-                    addedProduct.quantity = quantity;
-                    // console.log(addedProduct);
-                    storedCart.push(addedProduct);
-                }
-            }
-            setCart(storedCart);
-        }
-    }, [products]);
-
     const handleAddToCart = (product) => {
-        // console.log(product);
-        const newCart = [...cart, product];
+        const exists = cart.find(item => item.key === product.key);
+        let newCart = [];
+
+        if (exists) {
+            const rest = cart.filter(item => item.key !== product.key);
+            exists.quantity = exists.quantity + 1;
+            newCart = [...rest, product];
+        }
+        else {
+            product.quantity = 1;
+            newCart = [...cart, product];
+        }
+
+        // console.log(newCart);
         setCart(newCart);
+
         // Save to local storage
         addToDb(product.key);
     }
@@ -80,7 +74,9 @@ const Shop = () => {
                     }
                 </div>
                 <div className="cart-container">
-                    <Cart cart={cart}></Cart>
+                    <Cart cart={cart}>
+                        <Link to="/review"><button className="regular-btn">Order Review</button></Link>
+                    </Cart>
                 </div>
             </div>
         </div>

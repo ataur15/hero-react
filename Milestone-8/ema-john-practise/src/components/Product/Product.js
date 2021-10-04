@@ -17,15 +17,15 @@ const Product = (props) => {
                     <p>by: {seller}</p>
                     <p className="instock">In Stock: {stock}</p>
                     <p className="price"><b>${price}</b></p>
-                    <div>
+                    {/* <div>
                         <Rating
                             initialRating={star}
                             emptySymbol="far fa-star"
                             fullSymbol="fas fa-star"
                             readonly
                         />
-                    </div>
-                    <button onClick={() => props.handelAddToCart(props.product)} className="cart-btn">Add to cart</button>
+                    </div> */}
+                    <button onClick={() => props.handelAddToCart(props.product)} className="regular-btn">Add to cart</button>
                 </div>
             </div>
         </div>

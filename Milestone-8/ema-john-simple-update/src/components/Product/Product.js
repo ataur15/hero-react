@@ -28,7 +28,7 @@ const Product = (props) => {
                             readonly
                         />
                     </div>
-                    <button onClick={() => props.handleAddToCart(props.product)} className="cart-btn"><FontAwesomeIcon icon={faShoppingCart} /> Add to cart</button>
+                    <button onClick={() => props.handleAddToCart(props.product)} className="regular-btn"><FontAwesomeIcon icon={faShoppingCart} /> Add to cart</button>
                 </div>
             </div>
         </div>

@@ -1,4 +1,5 @@
-.cart-container h3 {
+.cart-container h3,
+h2 {
     margin: 0;
 }
 

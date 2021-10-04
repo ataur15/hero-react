@@ -13,7 +13,7 @@ const ReviewItem = (props) => {
                     <h3 className="item-header">{name}</h3>
                     <p className="instock">Quantity: {quantity}</p>
                     <p className="price"><b>${price}</b></p>
-                    <button onClick={() => props.handleRemove(key)} className="cart-btn">Remove</button>
+                    <button onClick={() => props.handleRemove(key)} className="regular-btn">Remove</button>
                 </div>
             </div>
         </div>

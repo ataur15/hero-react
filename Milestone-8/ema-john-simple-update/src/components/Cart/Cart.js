@@ -29,6 +29,7 @@ const Cart = (props) => {
             <p>Items: ${total}</p>
             <p>Shipping: ${shipping}</p>
             <h2 className="total">Total: ${grandTotal}</h2>
+            {props.children}
         </div>
     );
 };
