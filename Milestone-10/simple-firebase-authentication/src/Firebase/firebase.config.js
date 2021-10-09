@@ -1,11 +1,10 @@
-// Your web app's Firebase configuration
 const firebaseConfig = {
-    apiKey: "AIzaSyAqouNVfqup4JhHfQDhfCrPH8gnlBl_xGE",
-    authDomain: "fir-auth-b8b9f.firebaseapp.com",
-    projectId: "fir-auth-b8b9f",
-    storageBucket: "fir-auth-b8b9f.appspot.com",
-    messagingSenderId: "743691426164",
-    appId: "1:743691426164:web:e5ff8b3368f00623f03421"
+  apiKey: "AIzaSyAWuJ_sFV-M34OOGHSLy5b1o4CXFpIecl4",
+  authDomain: "simple-firebase-authenti-13f36.firebaseapp.com",
+  projectId: "simple-firebase-authenti-13f36",
+  storageBucket: "simple-firebase-authenti-13f36.appspot.com",
+  messagingSenderId: "997323564771",
+  appId: "1:997323564771:web:e0fa4482743b10a1fcc7d6"
 };
 
 export default firebaseConfig;

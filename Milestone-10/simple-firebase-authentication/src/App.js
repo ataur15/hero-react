@@ -1,5 +1,5 @@
 import './App.css';
-import { getAuth, signInWithPopup, GoogleAuthProvider, GithubAuthProvider, signOut } from "firebase/auth";
+import { getAuth, signInWithPopup, GoogleAuthProvider, GithubAuthProvider, FacebookAuthProvider, TwitterAuthProvider, signOut } from "firebase/auth";
 import initializeAuthentication from './Firebase/firebase.initialize';
 import { useState } from 'react';
 
@@ -22,6 +22,8 @@ const app = initializeApp(firebaseConfig);
 
 const googleProvider = new GoogleAuthProvider();
 const githubProvider = new GithubAuthProvider();
+const facebookProvider = new FacebookAuthProvider();
+const twitterProvider = new TwitterAuthProvider();
 
 function App() {
   const [user, setUser] = useState({});
@@ -37,10 +39,9 @@ function App() {
           email: email,
           photo: photoURL
         };
-
         setUser(loggedUser);
-
-      }).catch((error) => {
+      })
+      .catch((error) => {
         // ekta state a error ta rekhe ui te dekhaite paro
         console.log(error.message);
       });;
@@ -57,11 +58,46 @@ function App() {
           email: email,
           photo: photoURL
         };
-
         setUser(loggedUser);
-
-      }).catch((error) => {
+      })
+      .catch((error) => {
         // ekta state a error ta rekhe ui te dekhaite paro
+        console.log(error.message);
+      });
+  }
+
+  // Facebook Sign In
+  const handleFacebookSignIn = () => {
+    signInWithPopup(auth, facebookProvider)
+      .then((result) => {
+        console.log(result.user);
+        const { displayName, email, photoURL } = result.user;
+        const loggedUser = {
+          name: displayName,
+          email: email,
+          photo: photoURL
+        };
+        setUser(loggedUser);
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+  }
+
+  // Twitter Sign In
+  const handleTwitterSignIn = () => {
+    signInWithPopup(auth, twitterProvider)
+      .then((result) => {
+        console.log(result.user);
+        const { displayName, email, photoURL } = result.user;
+        const loggedUser = {
+          name: displayName,
+          email: email,
+          photo: photoURL
+        };
+        setUser(loggedUser);
+      })
+      .catch((error) => {
         console.log(error.message);
       });
   }
@@ -75,22 +111,24 @@ function App() {
   }
 
   return (
-    <div className="App">
+    <div className="text-center mt-6">
       {
-        !user.email ?
+        !user.name ?
           <div>
-            <button onClick={handleGoogleSignIn}>Google Sign In</button>
-            <button onClick={handleGithubSignIn}>Github Sign In</button>
+            <button className="border border-gray-300 py-1 px-2 mr-2" onClick={handleGoogleSignIn}>Google Sign In</button>
+            <button className="border border-gray-300 py-1 px-2 mr-2" onClick={handleGithubSignIn}>Github Sign In</button>
+            <button className="border border-gray-300 py-1 px-2 mr-2" onClick={handleFacebookSignIn}>Facebook Sign In</button>
+            <button className="border border-gray-300 py-1 px-2 mr-2" onClick={handleTwitterSignIn}>Twitter Sign In</button>
           </div>
           :
-          <button onClick={handleSignOut}>Sign Out</button>
+          <button className="border border-gray-300 py-1 px-2 mb-6" onClick={handleSignOut}>Sign Out</button>
       }
       <br />
       {
-        user.email &&
+        user.name &&
         <div>
-          <p><img src={user.photo} alt="" /></p>
-          <h2>{user.name}</h2>
+          <p className="mb-2"><img className="m-auto" src={user.photo} alt="" /></p>
+          <p className="text-xl mb-2">{user.name}</p>
           <p>{user.email}</p>
         </div>
       }
