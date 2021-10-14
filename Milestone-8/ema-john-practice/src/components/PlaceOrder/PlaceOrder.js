@@ -2,8 +2,8 @@ import React from 'react';
 
 const PlaceOrder = () => {
     return (
-        <div>
-            <h1>Your order has taken !!</h1>
+        <div className="text-center">
+            <h1>Your order is placed</h1>
         </div>
     );
 };

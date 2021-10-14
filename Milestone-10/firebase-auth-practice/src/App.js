@@ -42,7 +42,7 @@ function App() {
       });
   }
 
-  // Register new User
+  // Register new user
   const registerUser = (userEmail, password) => {
     createUserWithEmailAndPassword(auth, userEmail, password)
       .then(result => {

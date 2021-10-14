@@ -3,16 +3,20 @@ import { Link, useLocation, useHistory } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';
 
 const Login = () => {
-    const { signInWithGoogle } = useAuth();
+    const { signInWithGoogle, setIsLoading } = useAuth();
     const location = useLocation();
     const history = useHistory();
     const redirect_uri = location.state?.from || '/';
     // console.log('Came from', location.state?.from);
 
     const handleGoogleLogin = () => {
+        setIsLoading(true);
         signInWithGoogle()
             .then(result => {
                 history.push(redirect_uri);
+            })
+            .finally(() => {
+                setIsLoading(false);
             })
     }
 

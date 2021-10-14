@@ -12,8 +12,12 @@ const Header = () => {
             <span className="border border-gray-300 mr-3 py-1 px-2"><Link to="/home">Home</Link></span>
             <span className="border border-gray-300 mr-3 py-1 px-2"><Link to="/shipping">Shipping</Link></span>
             <span className="border border-gray-300 mr-3 py-1 px-2"><Link to="/placeorder">Place Order</Link></span>
-            <span className="border border-gray-300 mr-3 py-1 px-2"><Link to="/login">Login</Link></span>
-            <span className="border border-gray-300 mr-3 py-1 px-2"><Link to="/register">Register</Link></span>
+            {!user?.email &&
+                <label htmlFor="">
+                    <span className="border border-gray-300 mr-3 py-1 px-2"><Link to="/login">Login</Link></span>
+                    <span className="border border-gray-300 mr-3 py-1 px-2"><Link to="/register">Register</Link></span>
+                </label>
+            }
             <span>{user.displayName} </span>
             {user?.email &&
                 <span className="bg-gray-300 mr-3 py-1 px-2"><button onClick={logout}>Logout</button></span>

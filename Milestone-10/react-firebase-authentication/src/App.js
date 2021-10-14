@@ -21,8 +21,8 @@ function App() {
       });
   }
 
-  // Register Button
-  const handleRegistration = (e) => {
+  // Handle Form Submit
+  const handleSubmit = (e) => {
     e.preventDefault();
     
     if (password.length < 6) {
@@ -57,7 +57,7 @@ function App() {
       });
   }
 
-  // Register New User
+  // Register
   const registerNewUser = (email, password) => {
     createUserWithEmailAndPassword(auth, email, password)
       .then((result) => {
@@ -122,7 +122,7 @@ function App() {
         <h3 className="text-center py-4 text-2xl font-medium text-blue-600">
           {isLogin ? ' Login' : ' Register'}
         </h3>
-        <form onSubmit={handleRegistration} className="bg-white border border-gray-200 shadow-md rounded px-8 pt-6 pb-8 mb-4">
+        <form onSubmit={handleSubmit} className="bg-white border border-gray-200 shadow-md rounded px-8 pt-6 pb-8 mb-4">
           {error &&
             <p className="text-red-500 italic mb-3">{error}</p>
           }

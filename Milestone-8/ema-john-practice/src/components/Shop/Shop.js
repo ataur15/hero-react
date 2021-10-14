@@ -12,7 +12,7 @@ const Shop = () => {
     const [searchProducts, setSearchProducts] = useState([]);
 
     useEffect(() => {
-        fetch(`./products.JSON`)
+        fetch(`./products.json`)
             .then(res => res.json())
             .then(data => {
                 setProducts(data);
@@ -22,7 +22,7 @@ const Shop = () => {
 
     const handelAddToCart = (product) => {
         const newCart = [...cart, product];
-        console.log(newCart);
+        // console.log(newCart);
 
         setCart(newCart);
         addToDb(product.key);
