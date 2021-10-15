@@ -1,22 +1,24 @@
 import React from 'react';
 import { useParams } from 'react-router';
+import { Link } from 'react-router-dom';
 import useFoods from '../../hooks/useFoods';
 
 const Cart = (props) => {
+    // Get dynamic id
     const { id } = useParams();
     const [foods, setFoods] = useFoods();
 
+    // Get single item by id
     const single = foods.find(food => food.id === id);
     const count = props.count;
     const quantityPrice = single?.price * count;
-
     const shipping = 10;
     const tax = quantityPrice * 0.05;
     const totalPrice = quantityPrice + shipping + tax;
 
     return (
-        <div className="max-w-screen-xl overflow-x-auto m-auto px-4 py-10 md:py-10">
-            <h1 className="text-center text-3xl pb-20">Your Cart List</h1>
+        <div className="max-w-screen-xl overflow-x-auto m-auto px-4 py-10">
+            <h1 className="text-center text-2xl pb-14">Your Cart List</h1>
             <div className="grid grid-cols-1 md:grid-cols-12 gap-x-8">
                 <div className="md:col-span-9 inline-block mb-5 md:mb-0">
                     <div className="overflow-hidden border-b border-gray-200 sm:rounded-lg">
@@ -72,7 +74,7 @@ const Cart = (props) => {
                                         ${quantityPrice.toFixed(2)}
                                     </td>
                                     <td className="px-6 py-4 whitespace-nowrap text-right font-medium">
-                                        <a href="#" className="text-indigo-600 hover:text-indigo-900">Edit</a>
+                                        <a href="#" className="text-red-500 hover:text-red-600">Edit</a>
                                     </td>
                                 </tr>
                             </tbody>
@@ -83,7 +85,7 @@ const Cart = (props) => {
                     <div>
                         <div className="border-b border-gray-200 pb-2 mb-2 flex justify-between">
                             <span>Subtotal:</span>
-                            <span>${quantityPrice}</span>
+                            <span>${quantityPrice.toFixed(2)}</span>
                         </div>
                         <div className="border-b border-gray-200 pb-2 mb-2 flex justify-between">
                             <span>Shipping:</span>
@@ -98,7 +100,7 @@ const Cart = (props) => {
                             <span className="text-xl">{totalPrice.toFixed(2)}</span>
                         </div>
                     </div>
-                    <div className="mt-5"><button className="w-full bg-red-500 hover:bg-red-600 text-white rounded py-2 px-3">Checkout</button></div>
+                    <div className="mt-5"><Link to="/shipping"><button className="w-full bg-red-500 hover:bg-red-600 text-white rounded py-2 px-3">Checkout</button></Link></div>
                 </div>
             </div>
         </div>

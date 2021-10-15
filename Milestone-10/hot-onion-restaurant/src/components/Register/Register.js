@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { getAuth, createUserWithEmailAndPassword, updateProfile, signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import initAuthentication from '../../firebase/firebase.init';
 
 initAuthentication();
@@ -10,15 +10,15 @@ const Register = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
-    // const [confirmPassword, setConfirmPassword] = useState('');
-
     const auth = getAuth();
 
+    // Handle Form Submit
     const handleSubmit = (e) => {
         e.preventDefault();
         register();
     }
 
+    // Register
     const register = () => {
         createUserWithEmailAndPassword(auth, email, password)
             .then((result) => {
@@ -31,6 +31,7 @@ const Register = () => {
             });
     }
 
+    // Set Name
     const setUserName = () => {
         updateProfile(auth.currentUser, {
             displayName: name
@@ -57,8 +58,9 @@ const Register = () => {
         setConfirmPassword(e.target.value);
     } */
 
+
     return (
-        <div className="max-w-xs m-auto px-4 py-10 md:py-20">
+        <div className="max-w-xs m-auto px-4 py-10">
             <h2 className="text-2xl mb-8 text-center">Please Register</h2>
             <div>
                 <form onSubmit={handleSubmit}>

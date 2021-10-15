@@ -10,9 +10,14 @@ import ProductDetail from './components/ProductDetail/ProductDetail';
 import AuthProvider from './context/AuthProvider';
 import { useState } from 'react';
 import Cart from './components/Cart/Cart';
+import Shipping from './components/Shipping/Shipping';
+import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 
 
 function App() {
+  /**
+   * Quantity plus and minus
+   */
   const [count, setCount] = useState(1);
 
   const plus = () => {
@@ -40,6 +45,9 @@ function App() {
             <Route path="/cart/:id">
               <Cart plus={plus} minus={minus} count={count}></Cart>
             </Route>
+            <PrivateRoute path="/shipping">
+              <Shipping></Shipping>
+            </PrivateRoute>
             <Route path="/login">
               <Login></Login>
             </Route>

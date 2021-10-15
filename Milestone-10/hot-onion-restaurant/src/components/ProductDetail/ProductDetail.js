@@ -5,9 +5,11 @@ import useAuth from '../../hooks/useAuth';
 import useFoods from '../../hooks/useFoods';
 
 const ProductDetail = (props) => {
+    // Get dynamic id
     const { id } = useParams();
     const [foods, setFoods] = useFoods();
 
+    // Get single item by id
     const single = foods.find(food => food.id === id);
     const count = props.count;
     const totalaPrice = single?.price * count;

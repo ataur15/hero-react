@@ -4,21 +4,24 @@ import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signO
 const useFirebase = () => {
     const [user, setUser] = useState({});
     const [error, setError] = useState('');
+    const [isLoading, setIsLoading] = useState(true);
 
     const auth = getAuth();
     const googleProvider = new GoogleAuthProvider();
 
+    // Google login
     const signInWithGoogle = () => {
-        signInWithPopup(auth, googleProvider)
-            .then((result) => {
-                console.log(result.user);
-                setError('');
-            })
-            .catch((error) => {
-                setError(error.message);
-            });
+        return signInWithPopup(auth, googleProvider)
+        /* .then((result) => {
+            console.log(result.user);
+            setError('');
+        })
+        .catch((error) => {
+            setError(error.message);
+        }); */
     }
 
+    // Observe whether user Auth state changed or not
     useEffect(() => {
         onAuthStateChanged(auth, (user) => {
             if (user) {
@@ -26,21 +29,27 @@ const useFirebase = () => {
             } else {
                 setUser({});
             }
+            setIsLoading(false);
         });
     }, []);
 
+    // Logout
     const logout = () => {
+        setIsLoading(true);
         signOut(auth)
             .then(() => {
 
             })
-            .catch((error) => {
-                setError(error.message);
-            });
+            .finally(() => {
+                setIsLoading(false);
+            })
     }
 
     return {
         user,
+        error,
+        isLoading,
+        setIsLoading,
         logout,
         signInWithGoogle,
     }

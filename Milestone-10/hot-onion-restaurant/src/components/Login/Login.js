@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useHistory } from 'react-router-dom';
 import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
 import useAuth from '../../hooks/useAuth';
 
@@ -8,20 +8,48 @@ const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
-    const { signInWithGoogle } = useAuth();
+
+    const { signInWithGoogle, setIsLoading } = useAuth();
     const auth = getAuth();
 
+    /**
+     * After login redirect to the actual location
+     * -------------------------------------------
+     */
+
+    const location = useLocation();
+    const history = useHistory();
+    const redirect_uri = location.state?.from || '/';
+    // console.log('Came from', location.state?.from);
+
+    const handleGoogleLogin = () => {
+        setIsLoading(true);
+        signInWithGoogle()
+            .then(result => {
+                history.push(redirect_uri);
+            })
+            .finally(() => {
+                setIsLoading(false);
+            })
+    }
+
+    /**
+     * Login Mechanism
+     * ---------------
+     */
+
     const login = () => {
+        setIsLoading(true);
         signInWithEmailAndPassword(auth, email, password)
-            .then((result) => {
-                console.log(result.user);
-                setError('');
+            .then(result => {
+                history.push(redirect_uri);
             })
             .catch((error) => {
                 setError(error.message);
             });
     }
 
+    // Observe whether user Auth state changed or not
     useEffect(() => {
         onAuthStateChanged(auth, (user) => {
             if (user) {
@@ -29,19 +57,23 @@ const Login = () => {
             } else {
                 setUser({});
             }
+            setIsLoading(false);
         });
     }, []);
 
+    // Email Field
     const emailField = (e) => {
         setEmail(e.target.value);
     }
 
+    // Password Field
     const passwordField = (e) => {
         setPassword(e.target.value);
     }
 
+
     return (
-        <div className="max-w-xs m-auto px-4 py-10 md:py-20">
+        <div className="max-w-xs m-auto px-4 py-10">
             <h2 className="text-2xl mb-8 text-center">Please Login</h2>
             <div>
                 <p className="text-red-500 mb-4">{error}</p>
@@ -53,7 +85,7 @@ const Login = () => {
                 </div>
                 <div className="mb-4">
                     <button onClick={login} className="mb-3 bg-red-500 hover:bg-red-600 w-full rounded text-white text-center py-2 px-3">Login</button>
-                    <button onClick={signInWithGoogle} className="bg-yellow-500 w-full hover:bg-yellow-600 rounded text-white text-center py-2 px-3">Google Sign In</button>
+                    <button onClick={handleGoogleLogin} className="bg-yellow-500 w-full hover:bg-yellow-600 rounded text-white text-center py-2 px-3">Google Sign In</button>
                 </div>
                 <p className="text-red-600 text-center"><Link to="/register">Create a new account</Link></p>
             </div>

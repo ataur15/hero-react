@@ -22,7 +22,6 @@ const Header = (props) => {
                 {!user?.email &&
                     <div className="rounded-3xl bg-red-500 hover:bg-red-600 py-1 px-5 text-white"><Link to="/register">Register</Link></div>
                 }
-
             </div>
         </div>
     );

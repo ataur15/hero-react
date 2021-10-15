@@ -2,9 +2,9 @@ import React from 'react';
 import img1 from '../../../images/img1.png';
 import img2 from '../../../images/img2.png';
 import img3 from '../../../images/img3.png';
-import dicon1 from '../../../images/icon/delivery1.png';
-import dicon2 from '../../../images/icon/delivery2.png';
-import alarm from '../../../images/icon/alarm.png';
+import icon1 from '../../../images/icon/delivery1.png';
+import icon2 from '../../../images/icon/delivery2.png';
+import icon3 from '../../../images/icon/alarm.png';
 
 const ChooseUs = () => {
     return (
@@ -18,7 +18,7 @@ const ChooseUs = () => {
                     <div className="mb-6"><img src={img1} alt="" /></div>
                     <div className="flex">
                         <div className="w-14">
-                            <img src={dicon1} alt="" />
+                            <img src={icon1} alt="" />
                         </div>
                         <div className="flex-1">
                             <h3 className="text-xl font-medium mb-2">Fast Delivery</h3>
@@ -30,7 +30,7 @@ const ChooseUs = () => {
                     <div className="mb-6"><img src={img2} alt="" /></div>
                     <div className="flex">
                         <div className="w-14">
-                            <img src={alarm} alt="" />
+                            <img src={icon3} alt="" />
                         </div>
                         <div className="flex-1">
                             <h3 className="text-xl font-medium mb-2">Good Auto Responder</h3>
@@ -42,7 +42,7 @@ const ChooseUs = () => {
                     <div className="mb-6"><img src={img3} alt="" /></div>
                     <div className="flex">
                         <div className="w-14">
-                            <img src={dicon2} alt="" />
+                            <img src={icon2} alt="" />
                         </div>
                         <div className="flex-1">
                             <h3 className="text-xl font-medium mb-2">Home Delivery</h3>

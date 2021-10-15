@@ -12,7 +12,6 @@ const Footer = () => {
                     <span className="text-gray-300 mr-6">Terms & Condition</span>
                     <span className="text-gray-300 mr-6">Contact</span>
                 </div>
-
             </div>
         </div>
     );

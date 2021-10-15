@@ -6,7 +6,7 @@ const Breakfast = (props) => {
     return (
         <div className="card text-center shadow-xl border">
             <figure className="px-6 pt-6">
-                <img src={image} className="rounded-xl" />
+                <img src={image} className="rounded-xl" alt="" />
             </figure>
             <div className="card-body">
                 <h2 className="card-title">{name}</h2>
