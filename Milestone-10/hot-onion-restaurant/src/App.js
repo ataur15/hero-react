@@ -9,6 +9,7 @@ import Footer from './components/Shared/Footer/Footer';
 import ProductDetail from './components/ProductDetail/ProductDetail';
 import AuthProvider from './context/AuthProvider';
 import { useState } from 'react';
+import Cart from './components/Cart/Cart';
 
 
 function App() {
@@ -35,6 +36,9 @@ function App() {
             </Route>
             <Route path="/single/:id">
               <ProductDetail plus={plus} minus={minus} count={count}></ProductDetail>
+            </Route>
+            <Route path="/cart/:id">
+              <Cart plus={plus} minus={minus} count={count}></Cart>
             </Route>
             <Route path="/login">
               <Login></Login>

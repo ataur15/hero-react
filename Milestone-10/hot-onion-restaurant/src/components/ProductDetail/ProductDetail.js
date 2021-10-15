@@ -1,13 +1,15 @@
 import { useState } from 'react';
 import { useParams } from 'react-router';
+import { Link } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';
 import useFoods from '../../hooks/useFoods';
 
 const ProductDetail = (props) => {
     const { id } = useParams();
     const [foods, setFoods] = useFoods();
-    const count = props.count;
+
     const single = foods.find(food => food.id === id);
+    const count = props.count;
     const totalaPrice = single?.price * count;
 
     return (
@@ -28,7 +30,7 @@ const ProductDetail = (props) => {
                     </button>
                 </div>
                 <div>
-                    <button className="bg-red-500 hover:bg-red-600 text-white rounded py-2 px-4">Add to cart</button>
+                    <Link to={`/cart/${id}`}><button className="bg-red-500 hover:bg-red-600 text-white rounded py-2 px-4">Add to cart</button></Link>
                 </div>
             </div>
         </div>
