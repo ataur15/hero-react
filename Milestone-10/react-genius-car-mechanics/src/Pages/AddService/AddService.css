@@ -1,0 +1,8 @@
+.add-service form {
+    width: 300px;
+    margin: 0 auto;
+}
+
+.add-service form input, textarea {
+    width: 100%;
+}
