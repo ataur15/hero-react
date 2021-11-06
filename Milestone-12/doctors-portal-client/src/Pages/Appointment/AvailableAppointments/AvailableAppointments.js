@@ -1,5 +1,5 @@
-import React from 'react';
-import { Grid, Typography } from '@mui/material';
+import React, { useState } from 'react';
+import { Grid, Typography, Alert } from '@mui/material';
 import { Box } from '@mui/system';
 import chairImg from '../../../images/chair.png';
 import Calender from '../../Shared/Calender/Calender';
@@ -39,15 +39,23 @@ const bookings = [
 ]
 
 const AvailableAppointments = ({ date }) => {
+    const [bookingSuccess, setBookingSuccess] = useState(false);
     return (
         <div>
             <Box sx={{ margin: '50px 0' }}>
                 <Typography variant="h4" style={{ fontWeight: 'bold', marginBottom: '30px', textAlign: 'center' }}>
-                    Available Appointment on {date.toDateString()}
+                    Available Appointment on <span style={{ color: '#1976d2' }}>{date.toDateString()}</span>
                 </Typography>
+                {bookingSuccess && <Alert severity="success">Appointment Booked Successfully</Alert>}
                 <Grid container spacing={2}>
                     {
-                        bookings.map(booking => <Booking key={booking.id} booking={booking} date={date}></Booking>)
+                        bookings.map(booking => <Booking
+                            key={booking.id}
+                            booking={booking}
+                            date={date}
+                            setBookingSuccess={setBookingSuccess}
+                        >
+                        </Booking>)
                     }
                 </Grid>
             </Box>

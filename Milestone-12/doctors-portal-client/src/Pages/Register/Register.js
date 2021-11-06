@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Button, Container, Grid, TextField, Typography, CircularProgress, Alert } from '@mui/material';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import loginImg from '../../images/login.png'
 import useAuth from '../../hooks/useAuth';
 
@@ -8,6 +8,7 @@ import useAuth from '../../hooks/useAuth';
 const Register = () => {
     const [loginData, setLoginData] = useState({});
     const { user, registerUser, isLoading, authError } = useAuth();
+    const navigate = useNavigate();
 
     const handleFormSubmit = (e) => {
         e.preventDefault();
@@ -17,16 +18,16 @@ const Register = () => {
             return;
         }
 
-        registerUser(loginData.email, loginData.password);
+        registerUser(loginData.email, loginData.password, loginData.name, navigate);
     }
 
-    const handleOnChange = (e) => {
+    const handleOnBlur = (e) => {
         const field = e.target.name;
         const value = e.target.value;
         const newLoginData = { ...loginData }
         newLoginData[field] = value;
         setLoginData(newLoginData);
-        // console.log(field, value);
+        // console.log(newLoginData);
     }
 
     return (
@@ -45,7 +46,7 @@ const Register = () => {
                                 id="outlined-size-small"
                                 placeholder="Name"
                                 name="name"
-                                onChange={handleOnChange}
+                                onBlur={handleOnBlur}
                                 sx={{ width: '300px', mb: 2 }}
                                 size="small"
                             />
@@ -53,7 +54,7 @@ const Register = () => {
                                 id="outlined-size-small"
                                 placeholder="Email"
                                 name="email"
-                                onChange={handleOnChange}
+                                onBlur={handleOnBlur}
                                 sx={{ width: '300px', mb: 2 }}
                                 size="small"
                             />
@@ -62,7 +63,7 @@ const Register = () => {
                                 sx={{ width: '300px', mb: 2 }}
                                 placeholder="Password"
                                 name="password"
-                                onChange={handleOnChange}
+                                onBlur={handleOnBlur}
                                 type='password'
                                 size="small"
                             />
@@ -71,7 +72,7 @@ const Register = () => {
                                 sx={{ width: '300px', mb: 2 }}
                                 placeholder="Retype Password"
                                 name="password2"
-                                onChange={handleOnChange}
+                                onBlur={handleOnBlur}
                                 type='password'
                                 size="small"
                             />

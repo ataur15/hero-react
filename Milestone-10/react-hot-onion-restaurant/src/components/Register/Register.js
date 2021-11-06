@@ -22,7 +22,7 @@ const Register = () => {
     const register = () => {
         createUserWithEmailAndPassword(auth, email, password)
             .then((result) => {
-                console.log(result.user);
+                // console.log(result.user);
                 setUserName();
                 setError('');
             })

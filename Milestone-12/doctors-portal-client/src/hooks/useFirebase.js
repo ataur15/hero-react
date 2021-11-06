@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getAuth, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, signOut } from "firebase/auth";
+import { getAuth, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, updateProfile, signOut } from "firebase/auth";
 import initAuthentication from "../Pages/Login/FIrebase/firebase.init";
 import { useLocation } from 'react-router-dom';
 
@@ -14,11 +14,26 @@ const useFirebase = () => {
     const googleProvider = new GoogleAuthProvider();
 
     // Registration
-    const registerUser = (email, password) => {
+    const registerUser = (email, password, name, navigate) => {
         setIsLoading(true);
         createUserWithEmailAndPassword(auth, email, password)
             .then((result) => {
                 setAuthError('');
+                /* const newUser = { email, displayName: name };
+                setUser(newUser); */
+
+                // save user to the database
+                saveUser(email, name, 'POST');
+
+                // send name to the firebase after creation
+                updateProfile(auth.currentUser, {
+                    displayName: name
+                }).then(() => {
+
+                }).catch((error) => {
+
+                });
+                navigate('/');
             })
             .catch((error) => {
                 setAuthError(error.message);
@@ -46,6 +61,8 @@ const useFirebase = () => {
         setIsLoading(true);
         signInWithPopup(auth, googleProvider)
             .then((result) => {
+                const user = result.user;
+                saveUser(user.email, user.displayName, 'PUT');
                 const destination = location?.state?.from.pathname || '/';
                 navigate(destination);
                 setAuthError('');
@@ -79,6 +96,22 @@ const useFirebase = () => {
 
             })
             .finally(() => setIsLoading(false))
+    }
+
+    // save user to the database
+    const saveUser = (email, name, method) => {
+        const user = { email, name };
+        fetch('http://localhost:5000/users', {
+            method: method,
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(user)
+        })
+            .then(res => res.json())
+            .then(data => {
+
+            })
     }
 
     return {

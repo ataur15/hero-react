@@ -16,10 +16,47 @@ const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology:
 async function run() {
     try {
         await client.connect();
-        // const database = client.db("carMechanic");
-        // const servicesCollection = database.collection("services");
+        const database = client.db("doctors_portal");
+        const appointmentsCollection = database.collection("appointments");
+        const usersCollection = database.collection("users");
 
-        console.log('Successfully database connected');
+        // POST Api to add appointment
+        app.post('/appointments', async (req, res) => {
+            const appointment = req.body;
+            const result = await appointmentsCollection.insertOne(appointment);
+            // console.log(appointment);
+            res.json(result)
+        });
+
+        // GET Api to get appointments by email
+        app.get('/appointments', async (req, res) => {
+            const email = req.query.email;
+            const date = req.query.date;            
+            const query = { email: email, date: date };
+            const cursor = appointmentsCollection.find(query);
+            const appointments = await cursor.toArray();
+            res.json(appointments);
+        });
+
+        // POST Api to add user
+        app.post('/users', async (req, res) => {
+            const user = req.body;
+            const result = await usersCollection.insertOne(user);            
+            res.json(result)
+        });
+
+        // PUT Api for update user
+        app.put('/users', async (req, res) => {
+            const user = req.body;
+            const filter = { email: user.email };
+            const options = { upsert: true };
+            const updateDoc = { $set: user };
+            const result = await usersCollection.updateOne(filter, updateDoc, options);
+            res.json(result);
+        });
+
+
+        // console.log('Successfully database connected');
     }
     finally {
         // await client.close();
@@ -28,7 +65,7 @@ async function run() {
 run().catch(console.dir);
 
 app.get('/', (req, res) => {
-    res.send('Running Node Server');
+    res.send('Node Server is Running');
 });
 
 app.listen(port, () => {

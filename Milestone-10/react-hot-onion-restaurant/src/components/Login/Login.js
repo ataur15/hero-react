@@ -12,11 +12,8 @@ const Login = () => {
     const { signInWithGoogle, setIsLoading } = useAuth();
     const auth = getAuth();
 
-    /**
-     * After login redirect to the actual location
-     * -------------------------------------------
-     */
-
+ 
+    // After login redirect to the actual location
     const location = useLocation();
     const history = useHistory();
     const redirect_uri = location.state?.from || '/';
@@ -32,12 +29,8 @@ const Login = () => {
                 setIsLoading(false);
             })
     }
-
-    /**
-     * Login Mechanism
-     * ---------------
-     */
-
+   
+    // Login Mechanism
     const login = () => {
         setIsLoading(true);
         signInWithEmailAndPassword(auth, email, password)
