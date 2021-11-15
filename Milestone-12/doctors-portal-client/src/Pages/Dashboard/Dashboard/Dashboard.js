@@ -17,6 +17,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import { Outlet } from 'react-router';
 import { Link } from 'react-router-dom';
+import useAuth from '../../../hooks/useAuth';
 
 
 const drawerWidth = 240;
@@ -24,6 +25,7 @@ const drawerWidth = 240;
 function Dashboard(props) {
     const { window } = props;
     const [mobileOpen, setMobileOpen] = React.useState(false);
+    const { admin } = useAuth();
 
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
@@ -40,24 +42,16 @@ function Dashboard(props) {
             <div style={{ padding: '5px 15px', }}>
                 <Link to="/dashboard/home" style={{ color: '#000', textDecoration: 'none' }}>Dashboard</Link>
             </div>
-            <div style={{ padding: '5px 15px', }}>
-                <Link to="/dashboard/makeadmin" style={{ color: '#000', textDecoration: 'none' }}>Make Admin</Link>
-            </div>
-            <div style={{ padding: '5px 15px', }}>
-                <Link to="/dashboard/adddoctor" style={{ color: '#000', textDecoration: 'none' }}>Add Doctor</Link>
-            </div>
-
-            <List>
-                {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-                    <ListItem button key={text}>
-                        {/* <ListItemIcon>
-                            {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                        </ListItemIcon> */}
-                        <ListItemText primary={text} />
-                    </ListItem>
-                ))}
-
-            </List>
+            {admin &&
+                <Box>
+                    <div style={{ padding: '5px 15px', }}>
+                        <Link to="/dashboard/makeadmin" style={{ color: '#000', textDecoration: 'none' }}>Make Admin</Link>
+                    </div>
+                    <div style={{ padding: '5px 15px', }}>
+                        <Link to="/dashboard/adddoctor" style={{ color: '#000', textDecoration: 'none' }}>Add Doctor</Link>
+                    </div>
+                </Box>
+            }
         </div>
     );
 

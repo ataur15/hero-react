@@ -7,6 +7,9 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import { Link } from 'react-router-dom';
+
+
 
 const AppointmentList = (props) => {
     const { user } = useAuth();
@@ -18,7 +21,7 @@ const AppointmentList = (props) => {
         fetch(url)
             .then(res => res.json())
             .then(data => setAppointments(data))
-    }, [date]);
+    }, [date, user.email]);
 
     return (
         <div>
@@ -44,6 +47,7 @@ const AppointmentList = (props) => {
                                 </TableCell>
                                 <TableCell align="right">{appointment.time}</TableCell>
                                 <TableCell align="right">{appointment.serviceName}</TableCell>
+                                <TableCell align="right">{appointment.payment ? 'Paid' : <Link to={`/dashboard/payment/${appointment._id}`}><button>Pay</button></Link>}</TableCell>
                             </TableRow>
                         ))}
                     </TableBody>

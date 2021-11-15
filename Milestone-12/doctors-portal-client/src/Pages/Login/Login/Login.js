@@ -22,7 +22,7 @@ const Login = () => {
     }
 
     // Filed Data
-    const handleOnChange = (e) => {
+    const handleOnBlur = (e) => {
         const field = e.target.name;
         const value = e.target.value;
         const newLoginData = { ...loginData }
@@ -41,7 +41,7 @@ const Login = () => {
                             id="outlined-size-small"
                             placeholder="Email"
                             name="email"
-                            onChange={handleOnChange}
+                            onBlur={handleOnBlur}
                             sx={{ width: '300px', mb: 2 }}
                             size="small"
                         />
@@ -50,7 +50,7 @@ const Login = () => {
                             sx={{ width: '300px', mb: 2 }}
                             placeholder="Password"
                             name="password"
-                            onChange={handleOnChange}
+                            onBlur={handleOnBlur}
                             type='password'
                             size="small"
                         />

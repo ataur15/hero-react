@@ -10,30 +10,35 @@ const bookings = [
         id: 1,
         name: 'Teeth Orthodonics',
         time: '8.00 AM - 9.00 AM',
+        price: 20,
         space: 10,
     },
     {
         id: 2,
         name: 'Cosmetic Dentistry',
         time: '9.00 AM - 10.00 AM',
+        price: 30,
         space: 8,
     },
     {
         id: 3,
         name: 'Teeth Cleaning',
         time: '10.00 AM - 11.00 AM',
+        price: 25,
         space: 12,
     },
     {
         id: 4,
         name: 'Cavity Protection',
         time: '11.00 AM - 12.00 AM',
+        price: 45,
         space: 5,
     },
     {
         id: 6,
         name: 'Oral Surgery',
         time: '7.00 AM - 8.00 AM',
+        price: 35,
         space: 7,
     }
 ]
