@@ -2,7 +2,7 @@ import React from 'react';
 
 const NewsLetter = () => {
     return (
-        <div className="w-full lg:w-11/12 xl:w-10/12 m-auto px-4 mb-10 mb-20">
+        <div className="max-w-7xl m-auto px-4 mb-10 mb-20">
             <div className="bg-gray-100 py-10 px-6 rounded">
                 <div className="w-full md:max-w-4xl m-auto md:flex justify-between items-center">
                     <div className="flex mb-4 md:mb-0">

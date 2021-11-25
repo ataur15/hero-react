@@ -9,7 +9,7 @@ const Event = (props) => {
             <div className="mx-auto max-w-sm shadow-xl bg-cover bg-center transform duration-500 hover:-translate-y-2 cursor-pointer group" style={{ backgroundImage: "url(" + `${image}` + ")" }}>
                 <div className="bg-black bg-opacity-20 pb-8 px-8 pt-60 flex flex-wrap flex-col hover:bg-opacity-75 transform duration-300">
                     <div className="text-white mb-5 transform translate-y-20 group-hover:translate-y-0 duration-300">
-                        <h1 className="text-3xl font-medium mb-1">{name}</h1>
+                        <h1 className="text-2xl font-medium mb-1">{name}</h1>
                         <p className="text-xl">{date}</p>
                     </div>
                     <div className="w-16 h-2 bg-yellow-500 rounded-full mb-5 transform translate-y-20 group-hover:translate-y-0 duration-300"></div>

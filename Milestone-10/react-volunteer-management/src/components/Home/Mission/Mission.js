@@ -3,7 +3,7 @@ import { HiOutlineCurrencyDollar, HiOutlineLibrary, HiOutlineHand } from "react-
 
 const Mission = () => {
     return (
-        <div className="w-full lg:w-11/12 xl:w-10/12 m-auto px-4">
+        <div className="max-w-7xl m-auto px-4">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
                 <div className="p-10 mx-auto max-w-xl shadow-lg border border-gray-200">
                     <p className="flex justify-center"><span className="text-6xl text-gray-600"><HiOutlineCurrencyDollar /></span></p>

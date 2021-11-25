@@ -20,9 +20,9 @@ const Login = () => {
     }
 
     return (
-        <div className="w-full lg:w-11/12 xl:w-10/12 m-auto py-3 px-4">
+        <div className="max-w-7xl m-auto py-3 px-4">
             <div className="max-w-lg m-auto mb-20">
-                <h3 className="text-3xl text-center font-medium text-gray-700 my-6">PLEASE LOGIN</h3>
+                <h3 className="text-3xl text-center font-medium text-gray-700 my-6">Please Login</h3>
                 <div className="text-center"><button onClick={handleGoogleLogin} className="py-3 px-5 rounded text-white bg-yellow-500 hover:bg-red-600">Login with Google</button></div>
             </div>
         </div>

@@ -49,7 +49,7 @@ const Footer = () => {
                         </ul>
                     </div>
                 </div>
-                <div className="text-gray-200 border-t border-gray-700 py-8 px-4 text-center">
+                <div className="text-gray-200 border-t border-gray-700 py-6 px-4 text-center">
                     <p>Copyright &copy; 2021 All Rights Reserved by Volunteer Management.</p>
                 </div>
             </div>
