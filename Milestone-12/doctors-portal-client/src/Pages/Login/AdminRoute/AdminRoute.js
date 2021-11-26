@@ -3,7 +3,6 @@ import { CircularProgress } from '@mui/material';
 import { Navigate, Route, useLocation } from 'react-router-dom';
 import useAuth from '../../../hooks/useAuth';
 
-
 const AdminRoute = ({ children }) => {
     const { user, isLoading, admin } = useAuth();
     let location = useLocation();

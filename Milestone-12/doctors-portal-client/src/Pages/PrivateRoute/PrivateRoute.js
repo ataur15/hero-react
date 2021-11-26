@@ -17,14 +17,6 @@ const PrivateRoute = ({ children }) => {
             {
                 user.email ? children : <Navigate to="/login" state={{ from: location }} />
             }
-            {/* <Route
-                {...rest}
-                render={({ location }) =>
-                    user.email ? (children) : (
-                        <Navigate to="/login" state={{ from: location }} />
-                    )
-                }
-            /> */}
         </div>
     );
 };

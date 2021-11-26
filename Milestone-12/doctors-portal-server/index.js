@@ -4,13 +4,17 @@ const cors = require('cors');
 require('dotenv').config()
 const ObjectId = require('mongodb').ObjectId;
 var admin = require("firebase-admin");
+const fileUpload = require('express-fileupload');
 const stripe = require("stripe")(process.env.STRIPE_SECRET);
+
 
 const app = express();
 const port = process.env.PORT || 5000;
 
 app.use(cors());
 app.use(express.json());
+app.use(fileUpload());
+
 
 // Firebase Token
 var serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
@@ -45,6 +49,7 @@ async function run() {
         const database = client.db("doctors_portal");
         const appointmentsCollection = database.collection("appointments");
         const usersCollection = database.collection("users");
+        const doctorsCollection = database.collection("doctors");
 
         // POST Api to add appointment
         app.post('/appointments', async (req, res) => {
@@ -140,6 +145,32 @@ async function run() {
             const updateDoc = { $set: { payment: payment } };
             const result = await appointmentsCollection.updateOne(filter, updateDoc);
             res.json(result);
+        });
+
+        // POST api to add doctors
+        app.post('/doctors', async (req, res) => {
+            /*  console.log("body", req.body);
+             console.log("files", req.files); */
+            const name = req.body.name;
+            const email = req.body.email;
+            let imageFile = req.files.image;
+            const imageData = imageFile.data;
+            const encodeImage = imageData.toString('base64');
+            const imageBuffer = Buffer.from(encodeImage, 'base64');
+            const doctor = {
+                name,
+                email,
+                image: imageBuffer
+            };
+            const result = await doctorsCollection.insertOne(doctor);
+            res.json(result);
+        });
+
+        // GET api to get doctors
+        app.get('/doctors', async (req, res) => {
+            const cursor = doctorsCollection.find({});
+            const doctors = await cursor.toArray();
+            res.json(doctors);
         });
 
         // console.log('Successfully database connected');
