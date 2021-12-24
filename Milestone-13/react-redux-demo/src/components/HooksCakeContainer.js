@@ -9,7 +9,7 @@ function HooksCakeContainer() {
 
     return (
         <div>
-            <h2>Number of cakes using hooks - {numOfCakes} </h2>
+            <h2>Number of cakes - {numOfCakes} </h2>
             <button onClick={() => dispatch(buyCake())}>Buy Cake</button>
         </div>
     )
