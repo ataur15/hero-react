@@ -4,7 +4,6 @@ import { buyCake } from '../redux/cake/cakeActions'
 
 // This is a functional component
 function CakeContainer(props) {
-    console.log(props);
     return (
         <div>
             <h2>Number of cakes - {props.numOfCakes}</h2>

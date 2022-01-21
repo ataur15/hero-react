@@ -9,7 +9,7 @@ function NewMangoContainer() {
 
     return (
         <div>
-            <h2>Num of mangos - {numOfMangos} </h2>
+            <h2>Number of mangos - {numOfMangos} </h2>
             <input type="text" value={number} onChange={e => setNumber(e.target.value)} />
             <button onClick={() => dispatch(buyMango(number))}>Buy Mango</button>
         </div>

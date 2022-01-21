@@ -1,20 +1,20 @@
 import axios from "axios"
-import { FETCH_USERS_FAILURE, FETCH_USERS_REQUEST, FETCH_USERS_SUCCESS } from "./userTypes"
+import { FETCH_USERS_FAILURE, FETCH_USERS_REQUEST, FETCH_USERS_SUCCESS } from "./userActionTypes"
 
-export const fetchUserRequest = () => {
+const fetchUserRequest = () => {
     return {
         type: FETCH_USERS_REQUEST,
     }
 }
 
-export const fetchUserSuccess = (users) => {
+const fetchUserSuccess = (users) => {
     return {
         type: FETCH_USERS_SUCCESS,
         payload: users
     }
 }
 
-export const fetchUserError = (error) => {
+const fetchUserError = (error) => {
     return {
         type: FETCH_USERS_FAILURE,
         payload: error

@@ -123,29 +123,7 @@ async function run() {
                 isAdmin = true;
             }
             res.json({ admin: isAdmin });
-        });
-
-        // Payment intent
-        app.post("/create-payment-intent", async (req, res) => {
-            const paymentInfo = req.body;
-            const amount = paymentInfo.price * 100;
-            const paymentIntent = await stripe.paymentIntents.create({
-                currency: 'usd',
-                amount: amount,
-                payment_method_types: ['card'],
-            });
-            res.json({ clientSecret: paymentIntent.client_secret });
-        });
-
-        // update payment
-        app.put("/appointments/:id", async (req, res) => {
-            const id = req.params.id;
-            const payment = req.body;
-            const filter = { _id: ObjectId(id) };
-            const updateDoc = { $set: { payment: payment } };
-            const result = await appointmentsCollection.updateOne(filter, updateDoc);
-            res.json(result);
-        });
+        });        
 
         // POST api to add doctors
         app.post('/doctors', async (req, res) => {
@@ -171,6 +149,28 @@ async function run() {
             const cursor = doctorsCollection.find({});
             const doctors = await cursor.toArray();
             res.json(doctors);
+        });
+
+        // Payment intent
+        app.post("/create-payment-intent", async (req, res) => {
+            const paymentInfo = req.body;
+            const amount = paymentInfo.price * 100;
+            const paymentIntent = await stripe.paymentIntents.create({
+                amount: amount,
+                currency: 'usd',                
+                payment_method_types: ['card'],
+            });
+            res.json({ clientSecret: paymentIntent.client_secret });
+        });
+
+        // update payment
+        app.put("/appointments/:id", async (req, res) => {
+            const id = req.params.id;
+            const payment = req.body;
+            const filter = { _id: ObjectId(id) };
+            const updateDoc = { $set: { payment: payment } };
+            const result = await appointmentsCollection.updateOne(filter, updateDoc);
+            res.json(result);
         });
 
         // console.log('Successfully database connected');

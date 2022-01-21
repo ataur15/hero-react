@@ -22,9 +22,11 @@ const Payment = () => {
         <div>
             <h2>Payment for {appointment.serviceName}</h2>
             <h3>Pay: ${appointment.price}</h3>
-            {appointment?.price && <Elements stripe={stripePromise}>
-                <CheckoutForm appointment={appointment}></CheckoutForm>
-            </Elements>}
+            {appointment?.price && 
+                <Elements stripe={stripePromise}>
+                    <CheckoutForm appointment={appointment}></CheckoutForm>
+                </Elements>
+            }
         </div>
     );
 };
@@ -35,7 +37,7 @@ export default Payment;
 
 
 /**
- * 1. Install stripe and stripe-react
+ * 1. Install stripe-js and react-stripe-js
  * 2. Set publishable key
  * 3. Elements
  * 4. Checkout Form

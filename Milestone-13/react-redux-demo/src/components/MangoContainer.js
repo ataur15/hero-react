@@ -8,7 +8,7 @@ function MangoContainer() {
 
     return (
         <div>
-            <h2>Num of mangos - {numOfMangos} </h2>
+            <h2>Number of mangos - {numOfMangos} </h2>
             <button onClick={() => dispatch(buyMango())}>Buy Mango</button>
         </div>
     )

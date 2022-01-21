@@ -1,32 +1,32 @@
-import { FETCH_USERS_FAILURE, FETCH_USERS_REQUEST, FETCH_USERS_SUCCESS } from "./userActionTypes"
+import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE } from "./loginActionTypes";
 
 const initialState = {
     loading: false,
-    users: [],
-    error: ''
+    user: null,
+    error: null
 }
 
-const userReducer = (state = initialState, action) => {
+const loginReducer = (state = initialState, action) => {
     switch (action.type) {
-        case FETCH_USERS_REQUEST:
+        case LOGIN_REQUEST:
             return {
                 ...state,
                 loading: true
             }
             break;
 
-        case FETCH_USERS_SUCCESS:
+        case LOGIN_SUCCESS:
             return {
                 loading: false,
-                users: action.payload,
+                user: action.payload,
                 error: ''
             }
             break;
 
-        case FETCH_USERS_FAILURE:
+        case LOGIN_FAILURE:
             return {
                 loading: false,
-                users: [],
+                user: null,
                 error: action.payload
             }
             break;
@@ -35,4 +35,4 @@ const userReducer = (state = initialState, action) => {
     }
 }
 
-export default userReducer;
+export default loginReducer;
