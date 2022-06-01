@@ -29,7 +29,6 @@ const addToDb = id => {
  * @param {*} id
  * @returns
  */
-
 const deleteDb = id => {
     const exists = localStorage.getItem('shopping_cart');
     if (!exists) {

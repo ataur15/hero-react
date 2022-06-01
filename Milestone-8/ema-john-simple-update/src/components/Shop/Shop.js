@@ -31,13 +31,11 @@ const Shop = () => {
             const rest = cart.filter(item => item.key !== product.key);
             exists.quantity = exists.quantity + 1;
             newCart = [...rest, product];
-        }
-        else {
+        } else {
             product.quantity = 1;
             newCart = [...cart, product];
         }
 
-        // console.log(newCart);
         setCart(newCart);
 
         // Save to local storage
@@ -51,7 +49,7 @@ const Shop = () => {
                 return product;
             }
         });
-        // console.log(matchedProducts);
+
         setDisplayProducts(matchedProducts);
     }
 
